@@ -1,6 +1,6 @@
 package main
 
-import "veex0x01-intel/cmd"
+import "InfraVex/cmd"
 
 func main() {
 	cmd.Execute()

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/pkg/logger"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -15,11 +15,11 @@ var debug bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "veex0x01-intel",
-	Short: "Infrastructure Intelligence & Attack Surface Mapping Framework",
-	Long: `veex0x01-intel is strictly for authorized security assessments,
-Blue/Purple team operations, internal visibility, and bug bounty within scope.
-Built by: veex0x01`,
+	Use:   "InfraVex",
+	Short: "InfraVex - Infrastructure mapping framework",
+	Long: `InfraVex is strictly for authorized security assessments,
+blue/purple team operations, and internal visibility.
+Built by: medjahdi`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		// Initialize Config & Logger before any command runs
 		initConfig()
@@ -68,12 +68,13 @@ func initConfig() {
 
 func printBanner() {
 	banner := `
-  _    _  ___  ___ __  __ ___  ___ ___  ___  __    _  _ _ _____ ___ _    
- \ \  / /| __|| __|\ \/ // _ \|_  / _ \|_  | \ \  / /| | |_   _| __| |   
-  \ \/ / | _| | _|  >  <| (_) |/ / (_) |/ /   \ \/ / | |   | | | _|| |__ 
-   \__/  |___||___|/_/\_\\___//___\___//___|   \__/  |_|   |_| |___|____|
-                                                                        
- Infrastructure Intelligence Engine | Built by veex0x01
+    ____       _                 
+   /  _/____  / __/________ _    _____  _  __
+   / // __ \/ /_/ ___/ __ \ | / / _ \| |/_/
+ _/ // / / / __/ /  / /_/ / |/ /  __/>  <  
+/___/_/ /_/_/ /_/   \__,_/|___/\___/_/|_|  
+
+ Infrastructure Intelligence Engine | Built by medjahdi
  ----------------------------------------------------
  WARNING: For Authorized Assessments ONLY.
  ----------------------------------------------------

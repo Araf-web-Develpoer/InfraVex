@@ -1,4 +1,4 @@
-module veex0x01-intel
+module InfraVex
 
 go 1.22
 

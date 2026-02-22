@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/pkg/logger"
 )
 
 // IPInfo represents network intelligence for an IP

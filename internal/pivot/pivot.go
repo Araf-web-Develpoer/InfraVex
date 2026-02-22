@@ -3,7 +3,7 @@ package pivot
 import (
 	"fmt"
 
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/pkg/logger"
 )
 
 // AttemptASN handles the workflow of prompting user for out-of-scope ASN block expansion

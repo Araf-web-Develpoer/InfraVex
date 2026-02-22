@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/pkg/logger"
 )
 
 // CertInfo contains useful certificate data

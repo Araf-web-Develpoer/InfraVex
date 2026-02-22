@@ -1,106 +1,96 @@
-<div align="center">
+# InfraVex
 
-# `veex0x01-intel`
+![InfraVex Banner](pic.png)
 
 **Infrastructure Intelligence & Attack Surface Mapping Framework**
 
-*Built strictly for Authorized Security Assessments, Blue/Purple Team Operations, Internal Visibility, and Bug Bounty within scope.*
+*Designed for Authorized Security Assessments, Red/Purple Team Operations, and Targeted Bug Bounty Engagements.*
 
 [![Go Version](https://img.shields.io/badge/go-1.22+-blue.svg)](https://golang.org/dl/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-</div>
+---
+
+## Overview
+
+InfraVex is a highly concurrent, precision-focused infrastructure mapping engine authored by `@medjahdi`. It performs comprehensive reconnaissance and attack surface resolution through strict modularity, entirely bypassing blind internet-wide scanning methodologies.
+
+The framework is engineered around:
+* **Massive Concurrency:** Utilizes Go-native goroutines and semaphore-controlled worker pools to ensure rapid execution without OS-level memory exhaustion.
+* **Legal-by-Design Execution:** Enforces strict boundary checks against predefined targets (domains and CIDR blocks) in memory.
+* **CDN Evasion Logic:** Auto-detects reverse proxies and WAF infrastructure to prevent inaccurate edge-node fingerprinting.
+
+## Core Capabilities
+
+* **Passive Reconnaissance Mode:** Executes pure OSINT intelligence gathering including domain resolution (A/AAAA/CNAME), WHOIS lookups, and ASN extraction without establishing direct TCP handshakes with targets.
+* **Active Scanning Mode:** Performs rapid parallel TCP sweeps for port discovery and basic fingerprinting. Integrated semaphores prevent resource starvation.
+* **Automated CDN Bypass:** Identifies infrastructure belonging to Cloudflare, Akamai, Fastly, and AWS. Automatically halts active scanning against these nodes to prioritize origin discovery.
+* **Extensible Target Ingestion:** Processes single domains via CLI arguments or parses bulk datasets through unified scope configuration files.
+* **Persistent Local Storage:** Logs all discovered assets and relationships into a local SQLite tracking database.
+* **Actionable Reporting:** Generates dynamic Markdown (`report.md`) and JSON (`report.json`) exports tailored for SIEM ingestion and assessment documentation.
 
 ---
 
-## 🧠 Overview
+## Architecture Flow
 
-`veex0x01-intel` is a modular, high-performance, concurrent infrastructure mapping engine designed by `veex0x01`. It performs intelligent gathering and attack surface resolution without relying on unsafe or blind internet-wide scanning.
+1. **Input & Validation:** Sanitizes arrays of domains, IP addresses, and CIDR ranges.
+2. **Scope Enforcement:** Compiles a hard boundary map to drop any resolutions outside authorized parameters.
+3. **Resolution Engine:** Executes concurrent dual-stack DNS queries.
+4. **Network Intelligence:** Interrogates target IPs for Live ASN and Organization context, flagging CDN configurations.
+5. **Active Operations:** Initiates governed, multi-threaded TCP fingerprinting (Optional; requires explicit CLI authorization).
+6. **Reporting Engine:** Correlates intelligence fragments into localized structural graphs and tabular formats.
 
-The engine leverages:
+## Installation
 
-* Goroutines & Worker Pools for massive concurrency.
-* Strict in-memory scope enforcement to ensure **Legal-by-Design** execution.
-* CDN & Cloud edge node auto-detection to prevent useless scanning.
-* Context-aware API rate limiting and intelligent reporting.
-
-## ⚡ Features
-
-* **Passive Reconnaissance Mode** 🕵️‍♂️: Domain resolution, WHOIS, and ASN extraction without touching target infrastructure directly.
-* **Active Scanning Mode** 🚀: Extremely fast parallel TCP sweeps with concurrent safety (Semaphore limits built-in to prevent Linux `OOM Killed`).
-* **CDN Auto-Bypass** ☁️: Identifies Cloudflare, Akamai, Fastly, Amazon IPs and refuses to execute edge-node active port scans, ensuring findings are relevant to the actual origin structure.
-* **Multi-Target Ingestion**: Supports single domains via CLI, or bulk processing via text files (`--scope`).
-* **SQLite Storage**: Built-in persistent local asset tracking.
-* **Advanced Reporting** 📊: Generates interactive Markdown (`report.md`) and JSON (`report.json`) exports for easy parsing into SIEMs or Bug Bounty submissions.
-
----
-
-## 🛠️ Output & Architecture
-
-### Intelligence Workflow:
-
-1. **Input & Validation**: Checks domains, IPs, and CIDRs for valid structures.
-2. **Scope Enforcement Engine**: Hard boundary checks ensuring all targets belong to your authorized scope map.
-3. **Resolution**: Fast, concurrent dual-stack A/AAAA/CNAME lookups.
-4. **Network Intelligence Pivot**: Extracts real-time ASN and Organization context. Detects CDNs automatically.
-5. **Active Scanner**: Configurable multi-threaded TCP fingerprinting (Optional via confirmation prompt).
-6. **Reporting & Scoring Engine**: Collates intelligence and risk heuristics into centralized DB and local files.
-
-## 📦 Installation
-
-Ensure you have **Go 1.22+** installed.
+Ensure **Go 1.22+** is installed on your system.
 
 ```bash
-git clone https://github.com/veex0x01/CIDR.git
-cd CIDR
+git clone https://github.com/medjahdi/InfraVex.git
+cd InfraVex
 go mod tidy
-go build -o veex0x01-intel main.go
+go build -o InfraVex main.go
 ```
 
-## 🚀 Usage
+## Usage
 
-### Global Flags
-
+### Global Arguments
 ```text
-  -D, --domain string   Target domain (e.g., example.com)
-  -S, --scope string    Path to scope configuration file (multi-domain lists)
-  -M, --mode string     Scan mode: passive or active (default "passive")
-  -d, --debug           Enable debug level logging
+  -D, --domain string   Execute scan against a single target domain
+  -S, --scope string    Path to scope definition file for bulk execution
+  -M, --mode string     Operational mode: passive or active (default: "passive")
+  -d, --debug           Enable verbose debug-level logging
 ```
 
-### Examples
+### Execution Examples
 
-**1. Basic Passive Scan (Safe)**
-
+**1. Standard Passive OSINT**
 ```bash
-./veex0x01-intel scan --domain example.com --mode passive
+./InfraVex scan --domain target.com --mode passive
 ```
 
-**2. Multi-Target Subdomain List (File Ingestion)**
-Create a file named `targets.txt` with one domain/IP per line:
-
+**2. Multi-Target Batch Processing**
+Create a `targets.txt` file containing targets (domains, IPs):
 ```bash
-./veex0x01-intel scan --scope targets.txt --mode passive
+./InfraVex scan --scope targets.txt --mode passive
 ```
 
-**3. Active Penetration Scan**
-*Requires manual `YES` terminal confirmation. Will automatically bypass CDN (Cloudflare/AWS) IP blocks.*
-
+**3. Active Penetration Sequence**
+*Note: Active mode executes intentional TCP handshakes against targets and demands explicit `YES` confirmation at runtime. Infrastructure protected by known CDNs will be automatically bypassed.*
 ```bash
-./veex0x01-intel scan --scope targets.txt --mode active
+./InfraVex scan --scope targets.txt --mode active
 ```
 
 ---
 
-## ⚙️ Configuration (`config.yaml`)
+## Configuration Tuning
 
-You can control the scanning and concurrency footprint by adjusting the local configuration file:
+Operational performance profiling is governed by `config.yaml` located in the root directory:
 
 ```yaml
 performance:
-  max_workers: 50         # Goroutine TCP Dial Limit
-  timeout_seconds: 5      # Connection Timeout
-  rate_limit_rps: 100
+  max_workers: 50         # Goroutine concurrency cap for TCP dials
+  timeout_seconds: 5      # Network connection timeout thresholds
+  rate_limit_rps: 100     # Internal pacing
 
 scope:
   strict_enforcement: true
@@ -116,9 +106,9 @@ scanning:
 
 ---
 
-## ⚖️ Mandatory Legal Safeguards
+## Legal & Compliance Disclaimer
 
-**This tool is strictly developed for authorized penetration testing.**
-The author (`veex0x01`) is not responsible for any misuse, unauthorized profiling, or damages caused by executing active scans against infrastructure you do not own or possess explicit written consent to test.
+**This software is distributed strictly for authorized penetration testing and defensive posture assessment.** 
+The author (`@medjahdi`) accepts zero liability for misuse, unauthorized infrastructure profiling, or operational damages resulting from the execution of active scanning modules against systems for which the operator lacks explicit, written authorization. 
 
-By running `--mode active`, you take full operational and legal responsibility for the network packets dispatched.
+Execution of the `--mode active` parameter assigns full operational and legal liability for the generated network traffic directly to the user.

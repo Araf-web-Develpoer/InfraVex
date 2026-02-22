@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/pkg/logger"
 )
 
 // ActiveScan represents a controlled active TCP scan against explicit targets
@@ -100,7 +100,7 @@ func (s *ActiveScan) Fingerprint(ctx context.Context, ip string, port int) strin
 	var banner string
 	if port == 80 || port == 443 || port == 8080 {
 		// Minimum safe HTTP req for banner/Title grabbing
-		req := "HEAD / HTTP/1.1\r\nHost: " + ip + "\r\nUser-Agent: veex0x01-intel/1.0\r\nConnection: close\r\n\r\n"
+		req := "HEAD / HTTP/1.1\r\nHost: " + ip + "\r\nUser-Agent: InfraVex/1.0\r\nConnection: close\r\n\r\n"
 		conn.Write([]byte(req))
 		
 		buf := make([]byte, 1024)

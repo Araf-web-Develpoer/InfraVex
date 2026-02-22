@@ -7,9 +7,9 @@ import (
 	"net"
 	"sync"
 
-	"veex0x01-intel/pkg/dedup"
-	"veex0x01-intel/pkg/logger"
-	"veex0x01-intel/pkg/rate"
+	"InfraVex/pkg/dedup"
+	"InfraVex/pkg/logger"
+	"InfraVex/pkg/rate"
 )
 
 // ExpandCIDR safely expands a CIDR block into a list of usable IP strings.

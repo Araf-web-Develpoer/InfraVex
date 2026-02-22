@@ -5,9 +5,9 @@ import (
 	"os"
 	"strings"
 
-	"veex0x01-intel/pkg/logger"
-	"veex0x01-intel/pkg/utils"
-	"veex0x01-intel/pkg/validator"
+	"InfraVex/pkg/logger"
+	"InfraVex/pkg/utils"
+	"InfraVex/pkg/validator"
 )
 
 // ProcessTargets takes a single domain or a file, and validates them

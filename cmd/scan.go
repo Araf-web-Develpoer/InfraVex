@@ -9,14 +9,14 @@ import (
 	"syscall"
 	"time"
 
-	"veex0x01-intel/internal/input"
-	"veex0x01-intel/internal/network"
-	"veex0x01-intel/internal/reporting"
-	"veex0x01-intel/internal/resolver"
-	"veex0x01-intel/internal/scanner"
-	"veex0x01-intel/internal/scope"
-	"veex0x01-intel/internal/storage"
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/internal/input"
+	"InfraVex/internal/network"
+	"InfraVex/internal/reporting"
+	"InfraVex/internal/resolver"
+	"InfraVex/internal/scanner"
+	"InfraVex/internal/scope"
+	"InfraVex/internal/storage"
+	"InfraVex/pkg/logger"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -34,7 +34,7 @@ var scanCmd = &cobra.Command{
 	Short: "Start an intelligence gathering scan",
 	Long:  `Initiate a scan against a specific domain or scope file.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		logger.Info("Starting veex0x01-intel scan sequence", map[string]interface{}{
+		logger.Info("Starting InfraVex scan sequence", map[string]interface{}{
 			"mode":   mode,
 			"target": domain,
 		})
@@ -97,7 +97,7 @@ func runScan(ctx context.Context) {
 	scopeEngine := scope.NewEngine(targets)
 
 	// 2. Initialize Storage
-	db, err := storage.InitSQLite("veex0x01-intel.db")
+	db, err := storage.InitSQLite("infravex.db")
 	if err != nil {
 		logger.Error("Failed to initialize database", err)
 	} else {
@@ -195,9 +195,9 @@ func runScan(ctx context.Context) {
 	// 4. Generate Reporting
 	logger.Info("Generating risk report...", nil)
 	rep := &reporting.Report{
-		ProjectName: "veex0x01-intel",
+		ProjectName: "InfraVex",
 		ScanTime:    time.Now(),
-		Author:      "veex0x01",
+		Author:      "medjahdi",
 		Summary: map[string]int{
 			"total_targets": len(targets),
 			"total_assets":  len(reportAssets),

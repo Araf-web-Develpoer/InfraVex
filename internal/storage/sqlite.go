@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/pkg/logger"
 
 	// Mock driver import for SQLite (would use mattress/go-sqlite3 usually)
 	// _ "github.com/mattn/go-sqlite3"

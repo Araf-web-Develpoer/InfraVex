@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/pkg/logger"
 )
 
 // Record holds the DNS resolution results

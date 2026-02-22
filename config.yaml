@@ -1,45 +1,78 @@
-# veex0x01-intel Core Configuration
+# ==============================================================================
+# InfraVex - Core Infrastructure Intelligence Configuration
+# 
+# Author:  @medjahdi
+# Project: https://github.com/medjahdi/InfraVex
+# ==============================================================================
 
+# ------------------------------------------------------------------------------
+# Framework Metadata
+# ------------------------------------------------------------------------------
 framework:
-  author: "veex0x01"
-  name: "veex0x01-intel"
+  author: "medjahdi"
+  name: "InfraVex"
   version: "1.0.0"
 
+# ------------------------------------------------------------------------------
+# Performance & Concurrency Tuning
+# ------------------------------------------------------------------------------
 performance:
-  max_workers: 50
-  timeout_seconds: 10
+  # The maximum rate of network operations allowed per second
+  # Increase for speed; decrease to evade WAFs/Rate Limiters
   rate_limit_rps: 100
+  
+  # Maximum concurrent goroutines allocated for active port scanning
+  # High values (100+) require adequate OS file descriptor limits (ulimit -n)
+  max_workers: 50
+  
+  # TCP Dial timeout threshold (in seconds)
+  timeout_seconds: 5
 
+# ------------------------------------------------------------------------------
+# Execution Scope Governance
+# ------------------------------------------------------------------------------
 scope:
+  # When true, immediately drops any asset discovered outside authorized boundaries
   strict_enforcement: true
+  
+  # Prevents infinitely expanding massive blocks (e.g., /8 or /16)
+  # A /22 block limits expansion to 1,024 IPs per CIDR iteration
   max_cidr_expansion: 22
 
-risk_scoring:
-  open_rdp: "High"
-  exposed_db: "Critical"
-  weak_tls: "Medium"
-  expired_cert: "Low"
-
+# ------------------------------------------------------------------------------
+# Active Reconnaissance Parameters
+# ------------------------------------------------------------------------------
 scanning:
+  # The targeted TCP ports during active mode handshakes
+  # Tailored for High-Value Web Services, Orchestration, and Admin Interfaces
   top_ports:
-    - 21
-    - 22
-    - 23
-    - 25
-    - 53
-    - 80
-    - 110
-    - 111
-    - 135
-    - 139
-    - 143
-    - 443
-    - 445
-    - 993
-    - 995
-    - 1723
-    - 3306
-    - 3389
-    - 5900
-    - 8080
-    - 8443
+    # Standard Web Services
+    - 80    # HTTP
+    - 443   # HTTPS
+    - 8080  # Alternative HTTP
+    - 8443  # Alternative HTTPS
+    
+    # Common Admin, VPN & Infrastructure Overlays
+    - 22    # SSH Protocol
+    - 445   # SMB Protocol
+    - 3389  # RDP Remote Desktop
+    - 8444  # Common Alternative Web Admin
+    - 9443  # Common Alternative Web Admin
+    - 10443 # Common Alternative Web Admin
+
+# ------------------------------------------------------------------------------
+# Heuristic Risk Scoring Engine
+# ------------------------------------------------------------------------------
+risk:
+  # Ports indicative of critical exposure when found exposed to public WAN
+  high_severity_ports:
+    - 22    # SSH exposed externally
+    - 445   # SMB exposed externally
+    - 3389  # Remote Desktop Protocol
+  
+  # Ports representing elevated attack surface (Dev/Staging/Internal Ops)
+  medium_severity_ports:
+    - 8080  # Non-standard web (Tomcat, Dev servers)
+    - 8443  # Admin interfaces (Plesk, Custom)
+    - 9443  # Various Management UIs
+    - 10443 # Various Management UIs

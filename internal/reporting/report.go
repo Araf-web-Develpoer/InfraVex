@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"veex0x01-intel/internal/storage"
-	"veex0x01-intel/pkg/logger"
+	"InfraVex/internal/storage"
+	"InfraVex/pkg/logger"
 )
 
 // Report structure captures the final output
