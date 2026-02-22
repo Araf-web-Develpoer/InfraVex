@@ -1,0 +1,45 @@
+# veex0x01-intel Core Configuration
+
+framework:
+  author: "veex0x01"
+  name: "veex0x01-intel"
+  version: "1.0.0"
+
+performance:
+  max_workers: 50
+  timeout_seconds: 10
+  rate_limit_rps: 100
+
+scope:
+  strict_enforcement: true
+  max_cidr_expansion: 22
+
+risk_scoring:
+  open_rdp: "High"
+  exposed_db: "Critical"
+  weak_tls: "Medium"
+  expired_cert: "Low"
+
+scanning:
+  top_ports:
+    - 21
+    - 22
+    - 23
+    - 25
+    - 53
+    - 80
+    - 110
+    - 111
+    - 135
+    - 139
+    - 143
+    - 443
+    - 445
+    - 993
+    - 995
+    - 1723
+    - 3306
+    - 3389
+    - 5900
+    - 8080
+    - 8443
